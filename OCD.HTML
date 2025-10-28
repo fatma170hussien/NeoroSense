@@ -231,14 +231,19 @@
             font-size: 1.2rem;
         }
         
-        /* Comparison Table */
+        /* Comparison Table - UPDATED FOR MOBILE */
+        .comparison-table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin-top: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
         .comparison-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 2rem;
-            box-shadow: var(--shadow);
-            border-radius: 10px;
-            overflow: hidden;
+            min-width: 800px; /* الحد الأدنى للعرض لضمان عدم انضغاط المحتوى */
         }
         
         .comparison-table th, .comparison-table td {
@@ -475,7 +480,7 @@
             }
         }
         
-        /* Responsive Design */
+        /* Responsive Design - UPDATED FOR TABLES */
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
@@ -499,13 +504,48 @@
                 font-size: 2.2rem;
             }
             
+            /* تحسينات الجداول للهواتف */
+            .comparison-table-container {
+                font-size: 0.85rem;
+                border-radius: 8px;
+            }
+            
+            .comparison-table th, .comparison-table td {
+                padding: 0.8rem;
+            }
+            
             .comparison-table {
-                font-size: 0.9rem;
+                min-width: 700px; /* تقليل العرض الأدنى للجداول على الهواتف */
             }
             
             .hotline {
                 font-size: 1.8rem;
                 padding: 12px 20px;
+            }
+        }
+        
+        /* تحسينات إضافية للهواتف الصغيرة جداً */
+        @media (max-width: 480px) {
+            .comparison-table {
+                min-width: 650px; /* تقليل أكثر للهواتف الصغيرة */
+            }
+            
+            .comparison-table th, .comparison-table td {
+                padding: 0.6rem;
+                font-size: 0.8rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .hotline {
+                font-size: 1.6rem;
+                padding: 10px 18px;
             }
         }
     </style>
@@ -553,47 +593,49 @@
                     <p>OCD is a neuropsychiatric disorder characterized by recurrent, unwanted thoughts (obsessions) and/or repetitive behaviors or mental acts (compulsions) performed to reduce anxiety. It can start in childhood, adolescence, or adulthood and may persist chronically. It differs from normal habits or worries because the obsessions and compulsions are time-consuming, distressing, and interfere with daily life.</p>
                     
                     <h4 style="margin-top: 1.5rem; color: var(--primary);">Difference Between Normal Habits/Worries and OCD</h4>
-                    <table class="comparison-table">
-                        <thead>
-                            <tr>
-                                <th>Criterion</th>
-                                <th>Normal Habits/Worries</th>
-                                <th>OCD</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Trigger</td>
-                                <td>Appear occasionally in response to situations</td>
-                                <td>Occurs persistently, often without a clear reason</td>
-                            </tr>
-                            <tr>
-                                <td>Duration</td>
-                                <td>Temporary and situational</td>
-                                <td>Symptoms last ≥1 hour/day or more</td>
-                            </tr>
-                            <tr>
-                                <td>Severity & Impact</td>
-                                <td>Minor effect on daily life</td>
-                                <td>Causes significant distress and affects work, school, and relationships</td>
-                            </tr>
-                            <tr>
-                                <td>Thoughts & Behaviors</td>
-                                <td>May be repetitive but manageable</td>
-                                <td>Includes intrusive thoughts and compulsive rituals that feel uncontrollable</td>
-                            </tr>
-                            <tr>
-                                <td>Response to Support</td>
-                                <td>Often improve with reassurance</td>
-                                <td>Typically requires specialized therapy or medication</td>
-                            </tr>
-                            <tr>
-                                <td>Emotional Impact</td>
-                                <td>Mild frustration or concern</td>
-                                <td>Causes high anxiety, guilt, shame, or irritability</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="comparison-table-container">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Criterion</th>
+                                    <th>Normal Habits/Worries</th>
+                                    <th>OCD</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Trigger</td>
+                                    <td>Appear occasionally in response to situations</td>
+                                    <td>Occurs persistently, often without a clear reason</td>
+                                </tr>
+                                <tr>
+                                    <td>Duration</td>
+                                    <td>Temporary and situational</td>
+                                    <td>Symptoms last ≥1 hour/day or more</td>
+                                </tr>
+                                <tr>
+                                    <td>Severity & Impact</td>
+                                    <td>Minor effect on daily life</td>
+                                    <td>Causes significant distress and affects work, school, and relationships</td>
+                                </tr>
+                                <tr>
+                                    <td>Thoughts & Behaviors</td>
+                                    <td>May be repetitive but manageable</td>
+                                    <td>Includes intrusive thoughts and compulsive rituals that feel uncontrollable</td>
+                                </tr>
+                                <tr>
+                                    <td>Response to Support</td>
+                                    <td>Often improve with reassurance</td>
+                                    <td>Typically requires specialized therapy or medication</td>
+                                </tr>
+                                <tr>
+                                    <td>Emotional Impact</td>
+                                    <td>Mild frustration or concern</td>
+                                    <td>Causes high anxiety, guilt, shame, or irritability</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
