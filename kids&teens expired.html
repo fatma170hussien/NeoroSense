@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fun & Relax Zone - Kids & Teens</title>
+<style>
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #a2d2ff, #ffffff);
+    margin: 0;
+    padding: 0;
+    color: #333;
+  }
+
+  header {
+    text-align: center;
+    padding: 20px;
+    background-color: #001f4d; /* dark navy */
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 30px;
+    gap: 20px;
+  }
+
+  .card {
+    background: white;
+    border-radius: 15px;
+    width: 220px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  .card:hover {
+    transform: scale(1.05);
+  }
+
+  .card img {
+    width: 100%;
+    border-radius: 15px 15px 0 0;
+    height: 140px;
+    object-fit: cover;
+  }
+
+  .card h3 {
+    margin: 10px 0;
+    color: #444;
+  }
+
+  .card p {
+    font-size: 14px;
+    color: #777;
+    padding: 0 10px 15px;
+  }
+
+  #game-frame {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 9999;
+    padding: 0;
+    flex-direction: column;
+  }
+
+  #game-container {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .game-header {
+    background-color: #001f4d;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .game-title {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .back-btn {
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+
+  .back-btn:hover {
+    background-color: #ff5252;
+  }
+
+  #game-content {
+    flex: 1;
+    width: 100%;
+    height: calc(100% - 70px);
+    border: none;
+  }
+
+  .instructions {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    border-radius: 10px;
+    margin: 10px;
+    max-width: 500px;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<header>🎮 Fun & Relax Zone - Kids & Teens 🎨</header>
+
+<div class="container" id="cards-container">
+  <div class="card" onclick="openGame('memory', 'Memory Game')">
+    <img src="https://cdn-icons-png.flaticon.com/512/1169/1169608.png" alt="Memory Game">
+    <h3>Memory Game</h3>
+    <p>Boost your memory with a fun challenge 🎯</p>
+  </div>
+
+  <div class="card" onclick="openGame('breathing', 'Breathing Exercise')">
+    <img src="https://cdn-icons-png.flaticon.com/512/2721/2721294.png" alt="Breathing Exercise">
+    <h3>Breathing Exercise</h3>
+    <p>Relax and practice mindful breathing 🌬️</p>
+  </div>
+
+  <div class="card" onclick="openGame('puzzle', 'Puzzle Game')">
+    <img src="https://cdn-icons-png.flaticon.com/512/201/201623.png" alt="Puzzle Game">
+    <h3>Puzzle Game</h3>
+    <p>Solve fun puzzles and train your brain 🧩</p>
+  </div>
+
+  <div class="card" onclick="openGame('coloring', 'Coloring Book')">
+    <img src="https://cdn-icons-png.flaticon.com/512/3063/3063815.png" alt="Coloring Book">
+    <h3>Coloring Book</h3>
+    <p>Relax with a digital coloring book 🎨</p>
+  </div>
+
+  <div class="card" onclick="openGame('math', 'Math Challenge')">
+    <img src="https://cdn-icons-png.flaticon.com/512/2103/2103633.png" alt="Math Challenge">
+    <h3>Math Challenge</h3>
+    <p>Fun math games for all ages ➕</p>
+  </div>
+
+  <div class="card" onclick="openGame('typing', 'Typing Game')">
+    <img src="https://cdn-icons-png.flaticon.com/512/2936/2936737.png" alt="Typing Game">
+    <h3>Typing Game</h3>
+    <p>Improve your typing skills ⌨️</p>
+  </div>
+
+  <div class="card" onclick="openGame('maze', 'Maze Runner')">
+    <img src="https://cdn-icons-png.flaticon.com/512/619/619032.png" alt="Maze Runner">
+    <h3>Maze Runner</h3>
+    <p>Navigate through challenging mazes 🌀</p>
+  </div>
+
+  <div class="card" onclick="openGame('music', 'Music Maker')">
+    <img src="https://cdn-icons-png.flaticon.com/512/3659/3659784.png" alt="Music Maker">
+    <h3>Music Maker</h3>
+    <p>Create your own music and beats 🎵</p>
+  </div>
+
+  <div class="card" onclick="openGame('word', 'Word Search')">
+    <img src="https://cdn-icons-png.flaticon.com/512/3209/3209266.png" alt="Word Search">
+    <h3>Word Search</h3>
+    <p>Find hidden words in the puzzle 🔍</p>
+  </div>
+
+  <div class="card" onclick="openGame('drawing', 'Drawing Pad')">
+    <img src="https://cdn-icons-png.flaticon.com/512/3048/3048122.png" alt="Drawing Pad">
+    <h3>Drawing Pad</h3>
+    <p>Express your creativity with drawing ✏️</p>
+  </div>
+</div>
+
+<div id="game-frame">
+  <div class="game-header">
+    <div class="game-title" id="game-title">Game Title</div>
+    <button class="back-btn" onclick="goBack()">⬅️ Back to Games</button>
+  </div>
+  <div id="game-content"></div>
+</div>
+
+<script>
+// Game data with actual working games
+const games = {
+  memory: {
+    title: "Memory Game",
+    html: `
+      <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, #6a11cb, #2575fc); color: white; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <h1>Memory Game</h1>
+        <p>Match the pairs of cards!</p>
+        <div id="memory-board" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; max-width: 500px; margin: 20px auto;"></div>
+        <div style="margin-top: 20px;">
+          <button onclick="resetMemoryGame()" style="padding: 10px 20px; background: #ff6b6b; color: white; border: none; border-radius: 5px; cursor: pointer;">Reset Game</button>
+          <p id="memory-score" style="font-size: 18px; margin-top: 10px;">Matches: 0/8</p>
+        </div>
+      </div>
+    `,
+    script: function() {
+      const memoryBoard = document.getElementById('memory-board');
+      const memoryScore = document.getElementById('memory-score');
+      let cards = ['🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼'];
+      cards = [...cards, ...cards];
+      let flippedCards = [];
+      let matchedPairs = 0;
+      
+      // Shuffle cards
+      cards.sort(() => Math.random() - 0.5);
+      
+      // Create card elements
+      cards.forEach((emoji, index) => {
+        const card = document.createElement('div');
+        card.className = 'memory-card';
+        card.innerHTML = `
+          <div class="card-front">?</div>
+          <div class="card-back">${emoji}</div>
+        `;
+        card.style.cssText = `
+          width: 80px; 
+          height: 80px; 
+          background: white; 
+          border-radius: 10px; 
+          display: flex; 
+          align-items: center; 
+          justify-content: center; 
+          font-size: 24px; 
+          cursor: pointer;
+          position: relative;
+          transform-style: preserve-3d;
+          transition: transform 0.5s;
+        `;
+        
+        const front = card.querySelector('.card-front');
+        const back = card.querySelector('.card-back');
+        
+        front.style.cssText = back.style.cssText = `
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          backface-visibility: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 10px;
+        `;
+        
+        back.style.transform = 'rotateY(180deg)';
+        
+        card.addEventListener('click', () => flipCard(card, emoji));
+        memoryBoard.appendChild(card);
+      });
+      
+      function flipCard(card, emoji) {
+        if (flippedCards.length < 2 && !card.classList.contains('flipped')) {
+          card.style.transform = 'rotateY(180deg)';
+          card.classList.add('flipped');
+          flippedCards.push({card, emoji});
+          
+          if (flippedCards.length === 2) {
+            checkForMatch();
+          }
+        }
+      }
+      
+      function checkForMatch() {
+        const [card1, card2] = flippedCards;
+        
+        if (card1.emoji === card2.emoji) {
+          // Match found
+          matchedPairs++;
+          memoryScore.textContent = `Matches: ${matchedPairs}/8`;
+          flippedCards = [];
+          
+          if (matchedPairs === 8) {
+            setTimeout(() => {
+              alert('Congratulations! You won! 🎉');
+            }, 500);
+          }
+        } else {
+          // No match
+          setTimeout(() => {
+            card1.card.style.transform = 'rotateY(0deg)';
+            card2.card.style.transform = 'rotateY(0deg)';
+            card1.card.classList.remove('flipped');
+            card2.card.classList.remove('flipped');
+            flippedCards = [];
+          }, 1000);
+        }
+      }
+      
+      window.resetMemoryGame = function() {
+        memoryBoard.innerHTML = '';
+        flippedCards = [];
+        matchedPairs = 0;
+        memoryScore.textContent = 'Matches: 0/8';
+        cards.sort(() => Math.random() - 0.5);
+        
+        cards.forEach((emoji, index) => {
+          const card = document.createElement('div');
+          card.className = 'memory-card';
+          card.innerHTML = `
+            <div class="card-front">?</div>
+            <div class="card-back">${emoji}</div>
+          `;
+          card.style.cssText = `
+            width: 80px; 
+            height: 80px; 
+            background: white; 
+            border-radius: 10px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 24px; 
+            cursor: pointer;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+          `;
+          
+          const front = card.querySelector('.card-front');
+          const back = card.querySelector('.card-back');
+          
+          front.style.cssText = back.style.cssText = `
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+          `;
+          
+          back.style.transform = 'rotateY(180deg)';
+          
+          card.addEventListener('click', () => flipCard(card, emoji));
+          memoryBoard.appendChild(card);
+        });
+      };
+    }
+  },
+  
+  breathing: {
+    title: "Breathing Exercise",
+    html: `
+      <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, #00b09b, #96c93d); color: white; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <h1>Breathing Exercise</h1>
+        <p>Follow the circle to breathe in and out</p>
+        <div id="breathing-circle" style="width: 200px; height: 200px; border-radius: 50%; background: rgba(255,255,255,0.3); margin: 30px auto; display: flex; align-items: center; justify-content: center; font-size: 24px; transition: all 4s ease-in-out;"></div>
+        <div style="margin-top: 20px;">
+          <button onclick="startBreathing()" style="padding: 10px 20px; background: #ff6b6b; color: white; border: none; border-radius: 5px; cursor: pointer;">Start Breathing</button>
+          <p id="breathing-instruction" style="font-size: 18px; margin-top: 10px;">Click start to begin</p>
+        </div>
+      </div>
+    `,
+    script: function() {
+      const breathingCircle = document.getElementById('breathing-circle');
+      const breathingInstruction = document.getElementById('breathing-instruction');
+      let isBreathing = false;
+      
+      window.startBreathing = function() {
+        if (isBreathing) return;
+        
+        isBreathing = true;
+        breathingInstruction.textContent = "Breathe IN...";
+        breathingCircle.textContent = "INHALE";
+        breathingCircle.style.transform = "scale(1.5)";
+        breathingCircle.style.background = "rgba(255,255,255,0.5)";
+        
+        setTimeout(() => {
+          breathingInstruction.textContent = "Hold...";
+          breathingCircle.textContent = "HOLD";
+          
+          setTimeout(() => {
+            breathingInstruction.textContent = "Breathe OUT...";
+            breathingCircle.textContent = "EXHALE";
+            breathingCircle.style.transform = "scale(1)";
+            breathingCircle.style.background = "rgba(255,255,255,0.3)";
+            
+            setTimeout(() => {
+              breathingInstruction.textContent = "Ready for next breath";
+              breathingCircle.textContent = "";
+              isBreathing = false;
+            }, 4000);
+          }, 2000);
+        }, 4000);
+      };
+    }
+  },
+  
+  puzzle: {
+    title: "Puzzle Game",
+    html: `
+      <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, #ff9a9e, #fad0c4); color: white; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <h1>Puzzle Game</h1>
+        <p>Drag and drop the pieces to solve the puzzle</p>
+        <div id="puzzle-container" style="width: 300px; height: 300px; border: 2px dashed white; margin: 20px auto; position: relative;"></div>
+        <div style="margin-top: 20px;">
+          <button onclick="resetPuzzle()" style="padding: 10px 20px; background: #ff6b6b; color: white; border: none; border-radius: 5px; cursor: pointer;">Reset Puzzle</button>
+        </div>
+      </div>
+    `,
+    script: function() {
+      const puzzleContainer = document.getElementById('puzzle-container');
+      const pieces = ['🔴', '🟢', '🔵', '🟡', '🟣', '🟠'];
+      
+      pieces.forEach((piece, index) => {
+        const puzzlePiece = document.createElement('div');
+        puzzlePiece.textContent = piece;
+        puzzlePiece.style.cssText = `
+          width: 80px; 
+          height: 80px; 
+          background: rgba(255,255,255,0.8); 
+          border-radius: 10px; 
+          display: flex; 
+          align-items: center; 
+          justify-content: center; 
+          font-size: 40px; 
+          position: absolute;
+          cursor: move;
+          left: ${Math.random() * 200}px;
+          top: ${Math.random() * 200}px;
+        `;
+        
+        puzzlePiece.draggable = true;
+        
+        puzzlePiece.addEventListener('dragstart', (e) => {
+          e.dataTransfer.setData('text/plain', index);
+        });
+        
+        puzzleContainer.addEventListener('dragover', (e) => {
+          e.preventDefault();
+        });
+        
+        puzzleContainer.addEventListener('drop', (e) => {
+          e.preventDefault();
+          const index = e.dataTransfer.getData('text/plain');
+          const piece = puzzleContainer.children[index];
+          piece.style.left = (e.clientX - puzzleContainer.getBoundingClientRect().left - 40) + 'px';
+          piece.style.top = (e.clientY - puzzleContainer.getBoundingClientRect().top - 40) + 'px';
+        });
+        
+        puzzleContainer.appendChild(puzzlePiece);
+      });
+      
+      window.resetPuzzle = function() {
+        puzzleContainer.innerHTML = '';
+        pieces.forEach((piece, index) => {
+          const puzzlePiece = document.createElement('div');
+          puzzlePiece.textContent = piece;
+          puzzlePiece.style.cssText = `
+            width: 80px; 
+            height: 80px; 
+            background: rgba(255,255,255,0.8); 
+            border-radius: 10px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 40px; 
+            position: absolute;
+            cursor: move;
+            left: ${Math.random() * 200}px;
+            top: ${Math.random() * 200}px;
+          `;
+          
+          puzzlePiece.draggable = true;
+          
+          puzzlePiece.addEventListener('dragstart', (e) => {
+            e.dataTransfer.setData('text/plain', index);
+          });
+          
+          puzzleContainer.appendChild(puzzlePiece);
+        });
+      };
+    }
+  },
+  
+  coloring: {
+    title: "Coloring Book",
+    html: `
+      <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, #a1c4fd, #c2e9fb); color: #333; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <h1>Coloring Book</h1>
+        <p>Click on the areas to color them</p>
+        <div id="coloring-area" style="width: 300px; height: 300px; background: white; border: 2px solid #ccc; margin: 20px auto; display: grid; grid-template-columns: repeat(10, 1fr); grid-template-rows: repeat(10, 1fr);"></div>
+        <div style="margin-top: 20px;">
+          <div id="color-palette" style="display: flex; gap: 10px; margin-bottom: 10px;"></div>
+          <button onclick="clearColoring()" style="padding: 10px 20px; background: #ff6b6b; color: white; border: none; border-radius: 5px; cursor: pointer;">Clear Drawing</button>
+        </div>
+      </div>
+    `,
+    script: function() {
+      const coloringArea = document.getElementById('coloring-area');
+      const colorPalette = document.getElementById('color-palette');
+      let selectedColor = '#ff6b6b';
+      
+      // Create color palette
+      const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3', '#54a0ff', '#5f27cd'];
+      
+      colors.forEach(color => {
+        const colorOption = document.createElement('div');
+        colorOption.style.cssText = `
+          width: 30px; 
+          height: 30px; 
+          background: ${color}; 
+          border-radius: 50%; 
+          cursor: pointer;
+          border: ${color === selectedColor ? '2px solid white' : 'none'};
+        `;
+        
+        colorOption.addEventListener('click', () => {
+          selectedColor = color;
+          document.querySelectorAll('#color-palette div').forEach(opt => {
+            opt.style.border = 'none';
+          });
+          colorOption.style.border = '2px solid white';
+        });
+        
+        colorPalette.appendChild(colorOption);
+      });
+      
+      // Create coloring grid
+      for (let i = 0; i < 100; i++) {
+        const cell = document.createElement('div');
+        cell.style.border = '1px solid #f0f0f0';
+        cell.addEventListener('click', () => {
+          cell.style.background = selectedColor;
+        });
+        
+        coloringArea.appendChild(cell);
+      }
+      
+      window.clearColoring = function() {
+        document.querySelectorAll('#coloring-area div').forEach(cell => {
+          cell.style.background = 'white';
+        });
+      };
+    }
+  },
+  
+  // Additional games with similar structure
+  math: {
+    title: "Math Challenge",
+    html: `
+      <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <h1>Math Challenge</h1>
+        <p>Solve the math problems as fast as you can!</p>
+        <div id="math-problem" style="font-size: 36px; margin: 20px 0;">5 + 3 = ?</div>
+        <input type="number" id="math-answer" style="font-size: 24px; padding: 10px; width: 100px; text-align: center; margin: 10px;">
+        <button onclick="checkMathAnswer()" style="padding: 10px 20px; background: #ff6b6b; color: white; border: none; border-radius: 5px; cursor: pointer; margin: 10px;">Check Answer</button>
+        <p id="math-score" style="font-size: 18px;">Score: 0</p>
+      </div>
+    `,
+    script: function() {
+      let score = 0;
+      let num1, num2, operator, answer;
+      
+      function generateProblem() {
+        num1 = Math.floor(Math.random() * 10) + 1;
+        num2 = Math.floor(Math.random() * 10) + 1;
+        operator = '+';
+        answer = num1 + num2;
+        
+        document.getElementById('math-problem').textContent = `${num1} ${operator} ${num2} = ?`;
+        document.getElementById('math-answer').value = '';
+      }
+      
+      window.checkMathAnswer = function() {
+        const userAnswer = parseInt(document.getElementById('math-answer').value);
+        
+        if (userAnswer === answer) {
+          score++;
+          document.getElementById('math-score').textContent = `Score: ${score}`;
+          alert('Correct! 🎉');
+        } else {
+          alert(`Wrong! The correct answer is ${answer}`);
+        }
+        
+        generateProblem();
+      };
+      
+      generateProblem();
+    }
+  },
+  
+  // More games can be added in a similar way
+  typing: {
+    title: "Typing Game",
+    html: `
+      <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, #f093fb, #f5576c); color: white; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <h1>Typing Game</h1>
+        <p>Type the words as they appear!</p>
+        <div id="typing-word" style="font-size: 36px; margin: 20px 0;">hello</div>
+        <input type="text" id="typing-input" style="font-size: 24px; padding: 10px; width: 200px; text-align: center; margin: 10px;">
+        <p id="typing-score" style="font-size: 18px;">Words: 0</p>
+      </div>
+    `,
+    script: function() {
+      const words = ['hello', 'world', 'game', 'typing', 'keyboard', 'computer', 'javascript', 'html', 'css', 'fun'];
+      let wordIndex = 0;
+      let score = 0;
+      
+      document.getElementById('typing-word').textContent = words[wordIndex];
+      
+      document.getElementById('typing-input').addEventListener('input', function() {
+        if (this.value === words[wordIndex]) {
+          score++;
+          document.getElementById('typing-score').textContent = `Words: ${score}`;
+          this.value = '';
+          wordIndex = (wordIndex + 1) % words.length;
+          document.getElementById('typing-word').textContent = words[wordIndex];
+        }
+      });
+    }
+  },
+  
+  // Additional game templates
+  maze: {
+    title: "Maze Runner",
+    html: `
+      <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, #4facfe, #00f2fe); color: white; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <h1>Maze Runner</h1>
+        <p>Use arrow keys to navigate the maze</p>
+        <div id="maze-container" style="width: 300px; height: 300px; background: #1a1a2e; margin: 20px auto; position: relative;"></div>
+        <p id="maze-message" style="font-size: 18px;">Find the exit! 🏁</p>
+      </div>
+    `,
+    script: function() {
+      // Simple maze implementation
+      const mazeContainer = document.getElementById('maze-container');
+      const player = document.createElement('div');
+      player.textContent = '😊';
+      player.style.cssText = `
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-size: 24px;
+        transition: all 0.2s;
+      `;
+      
+      const exit = document.createElement('div');
+      exit.textContent = '🏁';
+      exit.style.cssText = `
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        font-size: 24px;
+      `;
+      
+      mazeContainer.appendChild(player);
+      mazeContainer.appendChild(exit);
+      
+      document.addEventListener('keydown', (e) => {
+        const playerRect = player.getBoundingClientRect();
+        const mazeRect = mazeContainer.getBoundingClientRect();
+        
+        switch(e.key) {
+          case 'ArrowUp':
+            if (playerRect.top > mazeRect.top + 10) {
+              player.style.top = (parseInt(player.style.top) - 10) + 'px';
+            }
+            break;
+          case 'ArrowDown':
+            if (playerRect.bottom < mazeRect.bottom - 10) {
+              player.style.top = (parseInt(player.style.top) + 10) + 'px';
+            }
+            break;
+          case 'ArrowLeft':
+            if (playerRect.left > mazeRect.left + 10) {
+              player.style.left = (parseInt(player.style.left) - 10) + 'px';
+            }
+            break;
+          case 'ArrowRight':
+            if (playerRect.right < mazeRect.right - 10) {
+              player.style.left = (parseInt(player.style.left) + 10) + 'px';
+            }
+            break;
+        }
+        
+        // Check if player reached exit
+        const playerPos = {
+          top: parseInt(player.style.top),
+          left: parseInt(player.style.left)
+        };
+        
+        if (playerPos.top > 250 && playerPos.left > 250) {
+          document.getElementById('maze-message').textContent = 'Congratulations! You found the exit! 🎉';
+        }
+      });
+    }
+  },
+  
+  music: {
+    title: "Music Maker",
+    html: `
+      <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, #fdbb2d, #22c1c3); color: white; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <h1>Music Maker</h1>
+        <p>Click the buttons to create music</p>
+        <div id="music-buttons" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px auto; max-width: 300px;"></div>
+        <button onclick="stopMusic()" style="padding: 10px 20px; background: #ff6b6b; color: white; border: none; border-radius: 5px; cursor: pointer; margin: 10px;">Stop Music</button>
+      </div>
+    `,
+    script: function() {
+      const notes = ['🎵', '🎶', '🎼', '🎹', '🎷', '🎺', '🎸', '🎻', '🥁'];
+      const musicButtons = document.getElementById('music-buttons');
+      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      
+      notes.forEach((note, index) => {
+        const button = document.createElement('button');
+        button.textContent = note;
+        button.style.cssText = `
+          width: 80px; 
+          height: 80px; 
+          background: rgba(255,255,255,0.3); 
+          border: none; 
+          border-radius: 10px; 
+          font-size: 30px; 
+          cursor: pointer;
+          transition: all 0.2s;
+        `;
+        
+        button.addEventListener('click', () => playNote(200 + (index * 100)));
+        button.addEventListener('mousedown', () => {
+          button.style.transform = 'scale(0.9)';
+          button.style.background = 'rgba(255,255,255,0.5)';
+        });
+        button.addEventListener('mouseup', () => {
+          button.style.transform = 'scale(1)';
+          button.style.background = 'rgba(255,255,255,0.3)';
+        });
+        
+        musicButtons.appendChild(button);
+      });
+      
+      function playNote(frequency) {
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.frequency.value = frequency;
+        oscillator.type = 'sine';
+        
+        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + 0.5);
+      }
+      
+      window.stopMusic = function() {
+        audioContext.close().then(() => {
+          // Audio context closed
+        });
+      };
+    }
+  },
+  
+  word: {
+    title: "Word Search",
+    html: `
+      <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <h1>Word Search</h1>
+        <p>Find the hidden words in the grid</p>
+        <div id="word-grid" style="display: grid; grid-template-columns: repeat(8, 1fr); gap: 5px; margin: 20px auto; max-width: 400px;"></div>
+        <div id="word-list" style="margin: 20px 0;">
+          <p>Find these words: <strong>CAT, DOG, SUN, FUN</strong></p>
+        </div>
+        <p id="word-found" style="font-size: 18px;">Words found: 0/4</p>
+      </div>
+    `,
+    script: function() {
+      const wordGrid = document.getElementById('word-grid');
+      const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      const words = ['CAT', 'DOG', 'SUN', 'FUN'];
+      let foundWords = 0;
+      
+      // Create word grid
+      for (let i = 0; i < 64; i++) {
+        const cell = document.createElement('div');
+        cell.textContent = letters[Math.floor(Math.random() * letters.length)];
+        cell.style.cssText = `
+          width: 40px; 
+          height: 40px; 
+          background: rgba(255,255,255,0.2); 
+          display: flex; 
+          align-items: center; 
+          justify-content: center; 
+          font-size: 18px; 
+          cursor: pointer;
+          border-radius: 5px;
+        `;
+        
+        cell.addEventListener('click', () => {
+          cell.style.background = '#ff6b6b';
+          // Simple word finding logic
+          const word = prompt('What word did you find?').toUpperCase();
+          if (words.includes(word)) {
+            alert(`You found "${word}"!`);
+            foundWords++;
+            document.getElementById('word-found').textContent = `Words found: ${foundWords}/4`;
+            
+            if (foundWords === 4) {
+              alert('Congratulations! You found all the words! 🎉');
+            }
+          }
+        });
+        
+        wordGrid.appendChild(cell);
+      }
+    }
+  },
+  
+  drawing: {
+    title: "Drawing Pad",
+    html: `
+      <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, #ffecd2, #fcb69f); color: #333; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <h1>Drawing Pad</h1>
+        <p>Draw anything you like!</p>
+        <canvas id="drawing-canvas" width="400" height="300" style="border: 2px solid #ccc; background: white; margin: 20px auto; cursor: crosshair;"></canvas>
+        <div style="margin-top: 20px;">
+          <div id="drawing-colors" style="display: flex; gap: 10px; margin-bottom: 10px; justify-content: center;"></div>
+          <button onclick="clearDrawing()" style="padding: 10px 20px; background: #ff6b6b; color: white; border: none; border-radius: 5px; cursor: pointer;">Clear Drawing</button>
+        </div>
+      </div>
+    `,
+    script: function() {
+      const canvas = document.getElementById('drawing-canvas');
+      const ctx = canvas.getContext('2d');
+      const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3', '#54a0ff', '#5f27cd', '#000000'];
+      let currentColor = '#ff6b6b';
+      let isDrawing = false;
+      
+      // Create color palette
+      const colorPalette = document.getElementById('drawing-colors');
+      colors.forEach(color => {
+        const colorOption = document.createElement('div');
+        colorOption.style.cssText = `
+          width: 30px; 
+          height: 30px; 
+          background: ${color}; 
+          border-radius: 50%; 
+          cursor: pointer;
+          border: ${color === currentColor ? '2px solid #333' : 'none'};
+        `;
+        
+        colorOption.addEventListener('click', () => {
+          currentColor = color;
+          document.querySelectorAll('#drawing-colors div').forEach(opt => {
+            opt.style.border = 'none';
+          });
+          colorOption.style.border = '2px solid #333';
+        });
+        
+        colorPalette.appendChild(colorOption);
+      });
+      
+      // Drawing functionality
+      canvas.addEventListener('mousedown', startDrawing);
+      canvas.addEventListener('mousemove', draw);
+      canvas.addEventListener('mouseup', stopDrawing);
+      canvas.addEventListener('mouseout', stopDrawing);
+      
+      function startDrawing(e) {
+        isDrawing = true;
+        draw(e);
+      }
+      
+      function draw(e) {
+        if (!isDrawing) return;
+        
+        ctx.lineWidth = 5;
+        ctx.lineCap = 'round';
+        ctx.strokeStyle = currentColor;
+        
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        ctx.lineTo(x, y);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+      }
+      
+      function stopDrawing() {
+        isDrawing = false;
+        ctx.beginPath();
+      }
+      
+      window.clearDrawing = function() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      };
+    }
+  }
+};
+
+function openGame(gameId, gameTitle) {
+  document.getElementById('cards-container').style.display = 'none';
+  document.getElementById('game-frame').style.display = 'flex';
+  document.getElementById('game-title').textContent = gameTitle;
+  
+  const gameContent = document.getElementById('game-content');
+  gameContent.innerHTML = games[gameId].html;
+  games[gameId].script();
+}
+
+function goBack() {
+  document.getElementById('cards-container').style.display = 'flex';
+  document.getElementById('game-frame').style.display = 'none';
+  document.getElementById('game-content').innerHTML = '';
+}
+</script>
+</body>
+</html>

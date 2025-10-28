@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - NeuroSense</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #6a11cb;
+      --secondary-color: #2575fc;
+      --accent-color: #4a00e0;
+      --text-color: #333;
+      --light-text: #fff;
+      --input-bg: #f5f5f5;
+      --error-color: #e74c3c;
+      --success-color: #2ecc71;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: var(--text-color);
+    }
+    
+    .auth-container {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 400px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .auth-header {
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      color: var(--light-text);
+      padding: 25px;
+      text-align: center;
+      position: relative;
+    }
+    
+    .auth-header h2 {
+      font-size: 1.8rem;
+      margin-bottom: 5px;
+    }
+    
+    .auth-header p {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+    
+    .auth-body {
+      padding: 25px;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    
+    .form-control {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: all 0.3s;
+      background-color: var(--input-bg);
+    }
+    
+    .form-control:focus {
+      border-color: var(--primary-color);
+      outline: none;
+      background-color: white;
+      box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.1);
+    }
+    
+    .input-icon {
+      position: absolute;
+      right: 15px;
+      top: 40px;
+      color: #999;
+    }
+    
+    .btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 10px;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .auth-footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.9rem;
+    }
+    
+    .auth-footer a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    
+    .auth-footer a:hover {
+      text-decoration: underline;
+    }
+    
+    .divider {
+      display: flex;
+      align-items: center;
+      margin: 20px 0;
+    }
+    
+    .divider::before, .divider::after {
+      content: "";
+      flex: 1;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    
+    .divider-text {
+      padding: 0 10px;
+      color: #777;
+      font-size: 0.8rem;
+    }
+    
+    .social-login {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .social-btn {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f5f5f5;
+      color: #555;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .social-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .facebook { color: #3b5998; }
+    .google { color: #db4437; }
+    .twitter { color: #1da1f2; }
+    
+    .error-message {
+      color: var(--error-color);
+      font-size: 0.8rem;
+      margin-top: 5px;
+      display: none;
+    }
+    
+    .success-message {
+      color: var(--success-color);
+      font-size: 0.9rem;
+      text-align: center;
+      margin-bottom: 15px;
+      display: none;
+    }
+    
+    /* Animation for form switching */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .auth-form {
+      animation: fadeIn 0.5s ease-out;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 480px) {
+      .auth-container {
+        width: 95%;
+      }
+      
+      .auth-header h2 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="auth-container" id="auth-container">
+    <div class="auth-header">
+      <h2>Welcome to NeuroSense</h2>
+      <p>Your smart mental health companion</p>
+    </div>
+    
+    <div class="auth-body">
+      <!-- Login Form -->
+      <form id="loginForm" class="auth-form">
+        <div class="success-message" id="loginSuccess"></div>
+        
+        <div class="form-group">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" class="form-control" placeholder="Enter your email" required>
+          <i class="fas fa-envelope input-icon"></i>
+          <div class="error-message" id="loginEmailError"></div>
+        </div>
+        
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" class="form-control" placeholder="Enter your password" required>
+          <i class="fas fa-lock input-icon"></i>
+          <div class="error-message" id="loginPasswordError"></div>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Login</button>
+        
+        <div class="auth-footer">
+          Don't have an account? <a href="#" id="showSignup">Sign up</a>
+        </div>
+      </form>
+      
+      <!-- Signup Form (hidden by default) -->
+      <form id="signupForm" class="auth-form" style="display: none;">
+        <div class="success-message" id="signupSuccess"></div>
+        
+        <div class="form-group">
+          <label for="signupName">Full Name</label>
+          <input type="text" id="signupName" class="form-control" placeholder="Enter your full name" required>
+          <i class="fas fa-user input-icon"></i>
+          <div class="error-message" id="signupNameError"></div>
+        </div>
+        
+        <div class="form-group">
+          <label for="signupEmail">Email</label>
+          <input type="email" id="signupEmail" class="form-control" placeholder="Enter your email" required>
+          <i class="fas fa-envelope input-icon"></i>
+          <div class="error-message" id="signupEmailError"></div>
+        </div>
+        
+        <div class="form-group">
+          <label for="signupPassword">Password</label>
+          <input type="password" id="signupPassword" class="form-control" placeholder="Create a password" required>
+          <i class="fas fa-lock input-icon"></i>
+          <div class="error-message" id="signupPasswordError"></div>
+        </div>
+        
+        <div class="form-group">
+          <label for="signupConfirmPassword">Confirm Password</label>
+          <input type="password" id="signupConfirmPassword" class="form-control" placeholder="Confirm your password" required>
+          <i class="fas fa-lock input-icon"></i>
+          <div class="error-message" id="signupConfirmPasswordError"></div>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Create Account</button>
+        
+        <div class="auth-footer">
+          Already have an account? <a href="#" id="showLogin">Login</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // DOM Elements
+    const loginForm = document.getElementById('loginForm');
+    const signupForm = document.getElementById('signupForm');
+    const showSignup = document.getElementById('showSignup');
+    const showLogin = document.getElementById('showLogin');
+    
+    // Toggle between login and signup forms
+    showSignup.addEventListener('click', (e) => {
+      e.preventDefault();
+      loginForm.style.display = 'none';
+      signupForm.style.display = 'block';
+    });
+    
+    showLogin.addEventListener('click', (e) => {
+      e.preventDefault();
+      signupForm.style.display = 'none';
+      loginForm.style.display = 'block';
+    });
+    
+    // Form validation and submission
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      // Reset error messages
+      document.querySelectorAll('#loginForm .error-message').forEach(el => {
+        el.style.display = 'none';
+      });
+      
+      // Get form values
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+      
+      // Simple validation
+      let isValid = true;
+      
+      if (!email) {
+        document.getElementById('loginEmailError').textContent = 'Email is required';
+        document.getElementById('loginEmailError').style.display = 'block';
+        isValid = false;
+      } else if (!/\S+@\S+\.\S+/.test(email)) {
+        document.getElementById('loginEmailError').textContent = 'Email is invalid';
+        document.getElementById('loginEmailError').style.display = 'block';
+        isValid = false;
+      }
+      
+      if (!password) {
+        document.getElementById('loginPasswordError').textContent = 'Password is required';
+        document.getElementById('loginPasswordError').style.display = 'block';
+        isValid = false;
+      } else if (password.length < 6) {
+        document.getElementById('loginPasswordError').textContent = 'Password must be at least 6 characters';
+        document.getElementById('loginPasswordError').style.display = 'block';
+        isValid = false;
+      }
+      
+      if (isValid) {
+        // Simulate successful login
+        document.getElementById('loginSuccess').textContent = 'Login successful! Redirecting...';
+        document.getElementById('loginSuccess').style.display = 'block';
+        
+        // Store user session (in a real app, you'd use proper authentication)
+        localStorage.setItem('isLoggedIn', 'true');
+        
+        // Redirect to home page after 1.5 seconds
+        setTimeout(() => {
+          window.location.href = 'home.html';
+        }, 1500);
+      }
+    });
+    
+    signupForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      // Reset error messages
+      document.querySelectorAll('#signupForm .error-message').forEach(el => {
+        el.style.display = 'none';
+      });
+      
+      // Get form values
+      const name = document.getElementById('signupName').value;
+      const email = document.getElementById('signupEmail').value;
+      const password = document.getElementById('signupPassword').value;
+      const confirmPassword = document.getElementById('signupConfirmPassword').value;
+      
+      // Simple validation
+      let isValid = true;
+      
+      if (!name) {
+        document.getElementById('signupNameError').textContent = 'Name is required';
+        document.getElementById('signupNameError').style.display = 'block';
+        isValid = false;
+      }
+      
+      if (!email) {
+        document.getElementById('signupEmailError').textContent = 'Email is required';
+        document.getElementById('signupEmailError').style.display = 'block';
+        isValid = false;
+      } else if (!/\S+@\S+\.\S+/.test(email)) {
+        document.getElementById('signupEmailError').textContent = 'Email is invalid';
+        document.getElementById('signupEmailError').style.display = 'block';
+        isValid = false;
+      }
+      
+      if (!password) {
+        document.getElementById('signupPasswordError').textContent = 'Password is required';
+        document.getElementById('signupPasswordError').style.display = 'block';
+        isValid = false;
+      } else if (password.length < 6) {
+        document.getElementById('signupPasswordError').textContent = 'Password must be at least 6 characters';
+        document.getElementById('signupPasswordError').style.display = 'block';
+        isValid = false;
+      }
+      
+      if (!confirmPassword) {
+        document.getElementById('signupConfirmPasswordError').textContent = 'Please confirm your password';
+        document.getElementById('signupConfirmPasswordError').style.display = 'block';
+        isValid = false;
+      } else if (password !== confirmPassword) {
+        document.getElementById('signupConfirmPasswordError').textContent = 'Passwords do not match';
+        document.getElementById('signupConfirmPasswordError').style.display = 'block';
+        isValid = false;
+      }
+      
+      if (isValid) {
+        // Simulate successful signup
+        document.getElementById('signupSuccess').textContent = 'Account created successfully! Redirecting to login...';
+        document.getElementById('signupSuccess').style.display = 'block';
+        
+        // Store user data (in a real app, you'd send this to a server)
+        const userData = {
+          name,
+          email,
+          password
+        };
+        localStorage.setItem('userData', JSON.stringify(userData));
+        
+        // Clear form
+        signupForm.reset();
+        
+        // Switch back to login form after 2 seconds
+        setTimeout(() => {
+          signupForm.style.display = 'none';
+          loginForm.style.display = 'block';
+          document.getElementById('signupSuccess').style.display = 'none';
+        }, 2000);
+      }
+    });
+  
+
+  </script>
+</body>
+</html>
