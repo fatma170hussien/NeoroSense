@@ -231,14 +231,19 @@
             font-size: 1.2rem;
         }
         
-        /* Comparison Table */
+        /* Comparison Table - UPDATED FOR MOBILE */
+        .comparison-table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin-top: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
         .comparison-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 2rem;
-            box-shadow: var(--shadow);
-            border-radius: 10px;
-            overflow: hidden;
+            min-width: 800px; /* الحد الأدنى للعرض لضمان عدم انضغاط المحتوى */
         }
         
         .comparison-table th, .comparison-table td {
@@ -434,7 +439,7 @@
             }
         }
         
-        /* Responsive Design */
+        /* Responsive Design - UPDATED FOR TABLES */
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
@@ -458,13 +463,43 @@
                 font-size: 2.2rem;
             }
             
+            /* تحسينات الجداول للهواتف */
+            .comparison-table-container {
+                font-size: 0.85rem;
+                border-radius: 8px;
+            }
+            
+            .comparison-table th, .comparison-table td {
+                padding: 0.8rem;
+            }
+            
             .comparison-table {
-                font-size: 0.9rem;
+                min-width: 700px; /* تقليل العرض الأدنى للجداول على الهواتف */
             }
             
             .hotline {
                 font-size: 1.8rem;
                 padding: 12px 20px;
+            }
+        }
+        
+        /* تحسينات إضافية للهواتف الصغيرة جداً */
+        @media (max-width: 480px) {
+            .comparison-table {
+                min-width: 650px; /* تقليل أكثر للهواتف الصغيرة */
+            }
+            
+            .comparison-table th, .comparison-table td {
+                padding: 0.6rem;
+                font-size: 0.8rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
             }
         }
     </style>
@@ -512,47 +547,49 @@
                     <p>Depression is more than just feeling sad - it's a serious mental health condition that affects your thoughts, feelings, and ability to function in daily life. With proper treatment and support, recovery is possible.</p>
                     
                     <h4 style="margin-top: 1.5rem; color: var(--primary);">Difference Between Normal Sadness and Clinical Depression</h4>
-                    <table class="comparison-table">
-                        <thead>
-                            <tr>
-                                <th>Criterion</th>
-                                <th>Normal Sadness</th>
-                                <th>Clinical Depression</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Trigger</td>
-                                <td>Usually linked to an identifiable event (loss, disappointment) and is expected</td>
-                                <td>May follow an event or arise with no clear trigger; reactions are disproportionate or persistent</td>
-                            </tr>
-                            <tr>
-                                <td>Duration</td>
-                                <td>Ebbing and flow; generally improves over weeks to months</td>
-                                <td>Persistent for ≥2 weeks (often much longer) and does not remit by itself</td>
-                            </tr>
-                            <tr>
-                                <td>Severity & Functional Impact</td>
-                                <td>May cause distress but doesn't typically prevent daily functioning</td>
-                                <td>Causes marked impairment in social, occupational, or other important areas</td>
-                            </tr>
-                            <tr>
-                                <td>Physical & Cognitive Symptoms</td>
-                                <td>Limited physical symptoms</td>
-                                <td>Significant sleep/appetite changes, fatigue, slowed thinking, concentration problems</td>
-                            </tr>
-                            <tr>
-                                <td>Response to Support</td>
-                                <td>Usually improves with social support, time, and coping</td>
-                                <td>May not significantly improve with support alone and often requires psychotherapy/medication</td>
-                            </tr>
-                            <tr>
-                                <td>Nature of Thoughts</td>
-                                <td>Thoughts about loss; self-esteem basically intact</td>
-                                <td>Pervasive negative self-evaluation, hopelessness, recurrent suicidal thoughts possible</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="comparison-table-container">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Criterion</th>
+                                    <th>Normal Sadness</th>
+                                    <th>Clinical Depression</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Trigger</td>
+                                    <td>Usually linked to an identifiable event (loss, disappointment) and is expected</td>
+                                    <td>May follow an event or arise with no clear trigger; reactions are disproportionate or persistent</td>
+                                </tr>
+                                <tr>
+                                    <td>Duration</td>
+                                    <td>Ebbing and flow; generally improves over weeks to months</td>
+                                    <td>Persistent for ≥2 weeks (often much longer) and does not remit by itself</td>
+                                </tr>
+                                <tr>
+                                    <td>Severity & Functional Impact</td>
+                                    <td>May cause distress but doesn't typically prevent daily functioning</td>
+                                    <td>Causes marked impairment in social, occupational, or other important areas</td>
+                                </tr>
+                                <tr>
+                                    <td>Physical & Cognitive Symptoms</td>
+                                    <td>Limited physical symptoms</td>
+                                    <td>Significant sleep/appetite changes, fatigue, slowed thinking, concentration problems</td>
+                                </tr>
+                                <tr>
+                                    <td>Response to Support</td>
+                                    <td>Usually improves with social support, time, and coping</td>
+                                    <td>May not significantly improve with support alone and often requires psychotherapy/medication</td>
+                                </tr>
+                                <tr>
+                                    <td>Nature of Thoughts</td>
+                                    <td>Thoughts about loss; self-esteem basically intact</td>
+                                    <td>Pervasive negative self-evaluation, hopelessness, recurrent suicidal thoughts possible</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
