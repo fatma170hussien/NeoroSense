@@ -223,14 +223,19 @@
             margin-left: -1em;
         }
         
-        /* Comparison Table */
+        /* Comparison Table - UPDATED FOR MOBILE */
+        .comparison-table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin-top: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
         .comparison-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 2rem;
-            box-shadow: var(--shadow);
-            border-radius: 10px;
-            overflow: hidden;
+            min-width: 800px; /* الحد الأدنى للعرض لضمان عدم انضغاط المحتوى */
         }
         
         .comparison-table th, .comparison-table td {
@@ -455,7 +460,7 @@
             }
         }
         
-        /* Responsive Design */
+        /* Responsive Design - UPDATED FOR TABLES */
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
@@ -479,8 +484,43 @@
                 font-size: 2rem;
             }
             
+            /* تحسينات الجداول للهواتف */
+            .comparison-table-container {
+                font-size: 0.85rem;
+                border-radius: 8px;
+            }
+            
+            .comparison-table th, .comparison-table td {
+                padding: 0.8rem;
+            }
+            
             .comparison-table {
-                font-size: 0.9rem;
+                min-width: 700px; /* تقليل العرض الأدنى للجداول على الهواتف */
+            }
+        }
+        
+        /* تحسينات إضافية للهواتف الصغيرة جداً */
+        @media (max-width: 480px) {
+            .comparison-table {
+                min-width: 650px; /* تقليل أكثر للهواتف الصغيرة */
+            }
+            
+            .comparison-table th, .comparison-table td {
+                padding: 0.6rem;
+                font-size: 0.8rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .hotline {
+                font-size: 1.6rem;
+                padding: 8px 16px;
             }
         }
     </style>
@@ -528,37 +568,39 @@
                     <p>Bipolar disorder is a chronic mental health condition characterized by extreme mood swings that include emotional heights (mania or hypomania) and lows (depression). It usually starts in late adolescence or early adulthood but can occur at any age. Unlike normal mood fluctuations, bipolar mood swings are intense, persistent, and disrupt daily life.</p>
                     
                     <h4 style="margin-top: 1.5rem; color: var(--primary);">Difference Between Normal Mood Changes and Bipolar Disorder</h4>
-                    <table class="comparison-table">
-                        <thead>
-                            <tr>
-                                <th>Criterion</th>
-                                <th>Normal Mood Changes</th>
-                                <th>Bipolar Disorder</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Trigger</td>
-                                <td>Mood changes linked to clear life events</td>
-                                <td>Mood swings occur without clear reason</td>
-                            </tr>
-                            <tr>
-                                <td>Duration</td>
-                                <td>Short-lived, resolve in days</td>
-                                <td>Episodes last weeks to months</td>
-                            </tr>
-                            <tr>
-                                <td>Severity</td>
-                                <td>Mild effect on daily activities</td>
-                                <td>Severe impact on work, school, and relationships</td>
-                            </tr>
-                            <tr>
-                                <td>Thoughts and Behavior</td>
-                                <td>Generally appropriate to situation</td>
-                                <td>Racing thoughts, impulsive decisions, risk-taking during mania; hopelessness and suicidal thoughts during depression</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="comparison-table-container">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Criterion</th>
+                                    <th>Normal Mood Changes</th>
+                                    <th>Bipolar Disorder</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Trigger</td>
+                                    <td>Mood changes linked to clear life events</td>
+                                    <td>Mood swings occur without clear reason</td>
+                                </tr>
+                                <tr>
+                                    <td>Duration</td>
+                                    <td>Short-lived, resolve in days</td>
+                                    <td>Episodes last weeks to months</td>
+                                </tr>
+                                <tr>
+                                    <td>Severity</td>
+                                    <td>Mild effect on daily activities</td>
+                                    <td>Severe impact on work, school, and relationships</td>
+                                </tr>
+                                <tr>
+                                    <td>Thoughts and Behavior</td>
+                                    <td>Generally appropriate to situation</td>
+                                    <td>Racing thoughts, impulsive decisions, risk-taking during mania; hopelessness and suicidal thoughts during depression</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
