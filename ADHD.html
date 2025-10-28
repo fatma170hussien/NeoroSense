@@ -223,14 +223,19 @@
             margin-left: -1em;
         }
         
-        /* Comparison Table */
+        /* Comparison Table - UPDATED FOR MOBILE */
+        .comparison-table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin-top: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
         .comparison-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 2rem;
-            box-shadow: var(--shadow);
-            border-radius: 10px;
-            overflow: hidden;
+            min-width: 800px; /* الحد الأدنى للعرض لضمان عدم انضغاط المحتوى */
         }
         
         .comparison-table th, .comparison-table td {
@@ -415,7 +420,7 @@
             }
         }
         
-        /* Responsive Design */
+        /* Responsive Design - UPDATED FOR TABLES */
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
@@ -439,8 +444,43 @@
                 font-size: 2rem;
             }
             
+            /* تحسينات الجداول للهواتف */
+            .comparison-table-container {
+                font-size: 0.85rem;
+                border-radius: 8px;
+            }
+            
+            .comparison-table th, .comparison-table td {
+                padding: 0.8rem;
+            }
+            
             .comparison-table {
-                font-size: 0.9rem;
+                min-width: 700px; /* تقليل العرض الأدنى للجداول على الهواتف */
+            }
+        }
+        
+        /* تحسينات إضافية للهواتف الصغيرة جداً */
+        @media (max-width: 480px) {
+            .comparison-table {
+                min-width: 650px; /* تقليل أكثر للهواتف الصغيرة */
+            }
+            
+            .comparison-table th, .comparison-table td {
+                padding: 0.6rem;
+                font-size: 0.8rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .hotline {
+                font-size: 1.6rem;
+                padding: 8px 16px;
             }
         }
     </style>
@@ -488,47 +528,49 @@
                     <p>ADHD is a neurodevelopmental condition that involves persistent patterns of inattention, hyperactivity, and impulsivity. It starts in childhood (before age 12 in most cases) and often continues into adulthood. Unlike normal restlessness or occasional distraction, ADHD symptoms are chronic, excessive, and impair daily functioning.</p>
                     
                     <h4 style="margin-top: 1.5rem; color: var(--primary);">Difference Between Normal Behavior and ADHD</h4>
-                    <table class="comparison-table">
-                        <thead>
-                            <tr>
-                                <th>Criterion</th>
-                                <th>Normal Behavior</th>
-                                <th>ADHD</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Trigger</td>
-                                <td>Distraction or high energy appears during boredom, fatigue, or excitement</td>
-                                <td>Difficulties persist regardless of environment or motivation</td>
-                            </tr>
-                            <tr>
-                                <td>Duration</td>
-                                <td>Short-term, context based</td>
-                                <td>Symptoms last ≥6 months consistently</td>
-                            </tr>
-                            <tr>
-                                <td>Severity & Functional Impact</td>
-                                <td>May affect performance sometimes</td>
-                                <td>Severe interference with school, work, and relationships</td>
-                            </tr>
-                            <tr>
-                                <td>Physical & Cognitive Signs</td>
-                                <td>Occasional daydreaming, moving around</td>
-                                <td>Chronic forgetfulness, messy tasks, impulsivity, restlessness, low frustration tolerance</td>
-                            </tr>
-                            <tr>
-                                <td>Response to Support</td>
-                                <td>Improvements with guidance or structure</td>
-                                <td>Limited improvement without structured interventions or medication</td>
-                            </tr>
-                            <tr>
-                                <td>Nature of Thoughts</td>
-                                <td>Normal thought patterns</td>
-                                <td>Racing thoughts, difficulty slowing down, poor impulse control, emotional dysregulation</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="comparison-table-container">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Criterion</th>
+                                    <th>Normal Behavior</th>
+                                    <th>ADHD</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Trigger</td>
+                                    <td>Distraction or high energy appears during boredom, fatigue, or excitement</td>
+                                    <td>Difficulties persist regardless of environment or motivation</td>
+                                </tr>
+                                <tr>
+                                    <td>Duration</td>
+                                    <td>Short-term, context based</td>
+                                    <td>Symptoms last ≥6 months consistently</td>
+                                </tr>
+                                <tr>
+                                    <td>Severity & Functional Impact</td>
+                                    <td>May affect performance sometimes</td>
+                                    <td>Severe interference with school, work, and relationships</td>
+                                </tr>
+                                <tr>
+                                    <td>Physical & Cognitive Signs</td>
+                                    <td>Occasional daydreaming, moving around</td>
+                                    <td>Chronic forgetfulness, messy tasks, impulsivity, restlessness, low frustration tolerance</td>
+                                </tr>
+                                <tr>
+                                    <td>Response to Support</td>
+                                    <td>Improvements with guidance or structure</td>
+                                    <td>Limited improvement without structured interventions or medication</td>
+                                </tr>
+                                <tr>
+                                    <td>Nature of Thoughts</td>
+                                    <td>Normal thought patterns</td>
+                                    <td>Racing thoughts, difficulty slowing down, poor impulse control, emotional dysregulation</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
