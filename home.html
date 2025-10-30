@@ -680,11 +680,6 @@
       color: #666;
     }
     
-    /* Chatbase Chatbot Styles - إخفاء الأيقونة السوداء */
-    #chatbase-bubble {
-      display: none !important;
-    }
-    
     /* زر الشات بوت الأزرق الصغير فقط */
     .chatbase-chatbot {
       position: fixed;
@@ -829,7 +824,7 @@
       <ul>
         <li><a href="home.html"><i class="fas fa-home"></i> Home</a></li>
         <li><a href="#"><i class="fas fa-chart-line"></i> Dashboard</a></li>
-        <li><a href="citation"><i class="fas fa-book"></i> Resources</a></li>
+        <li><a href="citation.html"><i class="fas fa-book"></i> Resources</a></li>
         <li><a href="#"><i class="fas fa-calendar-alt"></i> Appointments</a></li>
       </ul>
     </nav>
@@ -1018,7 +1013,22 @@
 
   <!-- Chatbase Script -->
   <script>
-    (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="OZEp7Bx0k4YqFR8LsheQ_";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+    // تهيئة الشات بوت بشكل صحيح
+    window.chatbaseConfig = {
+      chatbotId: 'OZEp7Bx0k4YqFR8LsheQ_'
+    };
+    
+    (function() {
+      var d = document;
+      var s = d.createElement('script');
+      s.src = 'https://www.chatbase.co/embed.min.js';
+      s.id = window.chatbaseConfig.chatbotId;
+      s.defer = true;
+      s.onload = function() {
+        window.chatbase('onLoad');
+      };
+      d.getElementsByTagName('head')[0].appendChild(s);
+    })();
   </script>
 
   <script>
@@ -1087,7 +1097,7 @@
       const userEmail = document.getElementById('userEmail').value;
       const currentPassword = document.getElementById('currentPassword').value;
       const newPassword = document.getElementById('newPassword').value;
-      const confirmPassword = document.getElementById('confirmPassword');
+      const confirmPassword = document.getElementById('confirmPassword').value;
       
       // Validate password changes if any field is filled
       if (currentPassword || newPassword || confirmPassword) {
@@ -1148,7 +1158,7 @@
       this.classList.remove('pulse');
     });
 
-    // إخفاء الأيقونة السوداء الافتراضية لـ Chatbase
+    // تهيئة الشات بوت بشكل صحيح
     document.addEventListener('DOMContentLoaded', function() {
       // إخفاء الأيقونة السوداء الافتراضية
       const hideDefaultBubble = setInterval(function() {
@@ -1163,10 +1173,22 @@
       chatbaseToggle.addEventListener('click', function() {
         if (window.chatbase && typeof window.chatbase === 'function') {
           window.chatbase('openChat');
+        } else {
+          // إذا لم يتم تحميل الشات بوت بشكل صحيح، إعادة التحميل
+          console.log('Chatbase not loaded properly, reloading...');
+          location.reload();
         }
       });
+      
+      // التأكد من ظهور الشات بوت بعد تحميل الصفحة
+      setTimeout(function() {
+        if (window.chatbase && typeof window.chatbase === 'function') {
+          console.log('Chatbase loaded successfully');
+        } else {
+          console.log('Chatbase failed to load');
+        }
+      }, 2000);
     });
   </script>
 </body>
-
 </html>
