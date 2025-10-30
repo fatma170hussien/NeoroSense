@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NeuroSense - Dashboard</title>
+  <title>NeuroSense - Interactive Dashboard</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
@@ -193,6 +193,12 @@
       flex-direction: column;
       position: relative;
       overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     }
     
     .stat-card::before {
@@ -248,6 +254,12 @@
       border-radius: 10px;
       padding: 25px;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .chart-container:hover, .recent-activity:hover, .mood-tracker:hover, .goals:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
     }
     
     .chart-container h2, .recent-activity h2, .mood-tracker h2, .goals h2 {
@@ -276,6 +288,11 @@
       align-items: center;
       padding: 15px 0;
       border-bottom: 1px solid #eee;
+      transition: background 0.3s;
+    }
+    
+    .activity-item:hover {
+      background: #f9f9f9;
     }
     
     .activity-item:last-child {
@@ -365,6 +382,11 @@
       align-items: center;
       padding: 15px 0;
       border-bottom: 1px solid #eee;
+      transition: background 0.3s;
+    }
+    
+    .goal-item:hover {
+      background: #f9f9f9;
     }
     
     .goal-item:last-child {
@@ -403,6 +425,7 @@
       height: 100%;
       background: var(--primary-color);
       border-radius: 4px;
+      transition: width 0.5s ease;
     }
     
     .progress-text {
@@ -524,10 +547,141 @@
       }
     }
     
+    /* Progress Level Indicator */
+    .progress-level {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 20px 0;
+      padding: 15px;
+      background: var(--card-bg);
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .level-indicator {
+      text-align: center;
+      padding: 0 20px;
+    }
+    
+    .level-indicator h3 {
+      color: var(--primary-color);
+      margin-bottom: 10px;
+    }
+    
+    .level-badge {
+      display: inline-block;
+      padding: 8px 15px;
+      background: var(--button-bg);
+      color: white;
+      border-radius: 20px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    
+    .level-progress {
+      flex: 1;
+      max-width: 400px;
+    }
+    
+    .level-progress h4 {
+      margin-bottom: 10px;
+      color: var(--primary-color);
+    }
+    
+    .level-bar {
+      height: 15px;
+      background: #e9ecef;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+    
+    .level-fill {
+      height: 100%;
+      background: var(--button-bg);
+      border-radius: 10px;
+      transition: width 0.8s ease;
+    }
+    
+    .level-stats {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      color: #666;
+    }
+    
+    /* Achievement Badges */
+    .achievements {
+      margin-top: 30px;
+    }
+    
+    .achievements h2 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: var(--primary-color);
+      display: flex;
+      align-items: center;
+    }
+    
+    .achievements h2 i {
+      margin-right: 10px;
+    }
+    
+    .badge-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 15px;
+    }
+    
+    .badge {
+      background: var(--card-bg);
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s;
+    }
+    
+    .badge:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .badge i {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: var(--primary-color);
+    }
+    
+    .badge.locked i {
+      color: #ccc;
+    }
+    
+    .badge h4 {
+      font-size: 0.9rem;
+      margin-bottom: 5px;
+    }
+    
+    .badge p {
+      font-size: 0.7rem;
+      color: #666;
+    }
+    
     /* Responsive adjustments */
     @media (max-width: 1024px) {
       .dashboard-grid {
         grid-template-columns: 1fr;
+      }
+      
+      .progress-level {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .level-progress {
+        width: 100%;
+        margin-top: 15px;
       }
     }
     
@@ -564,6 +718,10 @@
       .mood-grid {
         grid-template-columns: repeat(3, 1fr);
       }
+      
+      .badge-container {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      }
     }
     
     @media (max-width: 480px) {
@@ -577,6 +735,10 @@
       
       .dashboard-actions {
         grid-template-columns: 1fr;
+      }
+      
+      .badge-container {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
   </style>
@@ -618,6 +780,24 @@
           <option value="90">Last 3 Months</option>
           <option value="365">Last Year</option>
         </select>
+      </div>
+    </div>
+    
+    <!-- Progress Level Indicator -->
+    <div class="progress-level">
+      <div class="level-indicator">
+        <h3>Your Progress Level</h3>
+        <div class="level-badge" id="levelBadge">Beginner</div>
+      </div>
+      <div class="level-progress">
+        <h4>Next Level: <span id="nextLevel">Intermediate</span></h4>
+        <div class="level-bar">
+          <div class="level-fill" id="levelFill" style="width: 30%"></div>
+        </div>
+        <div class="level-stats">
+          <span id="currentXP">150 XP</span>
+          <span id="nextLevelXP">500 XP for next level</span>
+        </div>
       </div>
     </div>
     
@@ -717,6 +897,14 @@
       </div>
     </div>
     
+    <!-- Achievements Section -->
+    <div class="achievements">
+      <h2><i class="fas fa-trophy"></i> Your Achievements</h2>
+      <div class="badge-container" id="badgeContainer">
+        <!-- سيتم ملؤه بالبيانات الفعلية -->
+      </div>
+    </div>
+    
     <div class="dashboard-actions">
       <div class="action-card" onclick="location.href='bel.html'">
         <i class="fas fa-stethoscope"></i>
@@ -761,12 +949,90 @@
   </div>
 
   <script>
+    // نظام التقدم الديناميكي
+    const progressSystem = {
+      levels: [
+        { name: "Beginner", xpRequired: 0, badge: "fas fa-seedling" },
+        { name: "Intermediate", xpRequired: 500, badge: "fas fa-leaf" },
+        { name: "Advanced", xpRequired: 1200, badge: "fas fa-tree" },
+        { name: "Expert", xpRequired: 2500, badge: "fas fa-award" },
+        { name: "Master", xpRequired: 5000, badge: "fas fa-crown" }
+      ],
+      
+      achievements: [
+        { id: 1, name: "First Steps", description: "Complete your first activity", icon: "fas fa-footsteps", xp: 50, unlocked: false },
+        { id: 2, name: "Mood Tracker", description: "Track your mood for 7 consecutive days", icon: "fas fa-smile", xp: 100, unlocked: false },
+        { id: 3, name: "Consistency", description: "Use the platform for 14 days in a row", icon: "fas fa-calendar-check", xp: 150, unlocked: false },
+        { id: 4, name: "Goal Getter", description: "Complete all weekly goals", icon: "fas fa-bullseye", xp: 200, unlocked: false },
+        { id: 5, name: "Wellness Warrior", description: "Reach a wellness score of 80+", icon: "fas fa-heart", xp: 250, unlocked: false },
+        { id: 6, name: "Meditation Master", description: "Complete 10 meditation sessions", icon: "fas fa-spa", xp: 150, unlocked: false },
+        { id: 7, name: "Knowledge Seeker", description: "Read 5 mental health articles", icon: "fas fa-book", xp: 100, unlocked: false },
+        { id: 8, name: "Community Helper", description: "Share your progress with others", icon: "fas fa-users", xp: 100, unlocked: false }
+      ],
+      
+      // حساب المستوى الحالي بناءً على XP
+      getCurrentLevel(xp) {
+        for (let i = this.levels.length - 1; i >= 0; i--) {
+          if (xp >= this.levels[i].xpRequired) {
+            return {
+              level: i,
+              name: this.levels[i].name,
+              badge: this.levels[i].badge,
+              nextLevel: i < this.levels.length - 1 ? this.levels[i + 1] : null,
+              progress: i < this.levels.length - 1 ? 
+                (xp - this.levels[i].xpRequired) / (this.levels[i + 1].xpRequired - this.levels[i].xpRequired) : 1
+            };
+          }
+        }
+        return {
+          level: 0,
+          name: this.levels[0].name,
+          badge: this.levels[0].badge,
+          nextLevel: this.levels[1],
+          progress: xp / this.levels[1].xpRequired
+        };
+      },
+      
+      // تحديث الإنجازات
+      updateAchievements(userData) {
+        const achievements = [...this.achievements];
+        
+        // First Steps - Complete any activity
+        if (userData.activities && userData.activities.length > 0) {
+          achievements[0].unlocked = true;
+        }
+        
+        // Mood Tracker - Track mood for 7 consecutive days
+        if (userData.moodData && Object.keys(userData.moodData).length >= 7) {
+          achievements[1].unlocked = true;
+        }
+        
+        // Consistency - Use platform for 14 consecutive days
+        if (userData.consistencyStreak >= 14) {
+          achievements[2].unlocked = true;
+        }
+        
+        // Goal Getter - Complete all weekly goals
+        if (userData.goals && userData.goals.every(goal => goal.checked)) {
+          achievements[3].unlocked = true;
+        }
+        
+        // Wellness Warrior - Reach wellness score of 80+
+        if (userData.wellnessScore >= 80) {
+          achievements[4].unlocked = true;
+        }
+        
+        return achievements;
+      }
+    };
+
     // بيانات أولية في حالة عدم وجود بيانات مخزنة
     const defaultDashboardData = {
       wellnessScore: 78,
       completedExercises: 12,
       sleepQuality: 6.5,
       consistencyStreak: 7,
+      totalXP: 150,
       moodData: {
         '2025-01-01': 'good',
         '2025-01-02': 'excellent',
@@ -777,16 +1043,16 @@
         '2025-01-07': 'excellent'
       },
       activities: [
-        { type: 'assessment', title: 'Completed Anxiety Assessment', time: '2 hours ago' },
-        { type: 'meditation', title: 'Finished Meditation Session', time: 'Yesterday, 3:45 PM' },
-        { type: 'reading', title: 'Read Article on Stress Management', time: '2 days ago' },
-        { type: 'exercise', title: 'Completed CBT Exercise', time: '3 days ago' }
+        { type: 'assessment', title: 'Completed Anxiety Assessment', time: '2 hours ago', xp: 20 },
+        { type: 'meditation', title: 'Finished Meditation Session', time: 'Yesterday, 3:45 PM', xp: 15 },
+        { type: 'reading', title: 'Read Article on Stress Management', time: '2 days ago', xp: 10 },
+        { type: 'exercise', title: 'Completed CBT Exercise', time: '3 days ago', xp: 25 }
       ],
       goals: [
-        { id: 1, title: 'Complete 3 meditation sessions', completed: 3, total: 3, checked: true },
-        { id: 2, title: 'Read 2 mental health articles', completed: 2, total: 2, checked: true },
-        { id: 3, title: 'Practice breathing exercises daily', completed: 4, total: 7, checked: false },
-        { id: 4, title: 'Sleep 7+ hours for 5 nights', completed: 3, total: 5, checked: false }
+        { id: 1, title: 'Complete 3 meditation sessions', completed: 3, total: 3, checked: true, xp: 30 },
+        { id: 2, title: 'Read 2 mental health articles', completed: 2, total: 2, checked: true, xp: 20 },
+        { id: 3, title: 'Practice breathing exercises daily', completed: 4, total: 7, checked: false, xp: 35 },
+        { id: 4, title: 'Sleep 7+ hours for 5 nights', completed: 3, total: 5, checked: false, xp: 25 }
       ]
     };
 
@@ -816,6 +1082,12 @@
       document.getElementById('completedExercises').textContent = dashboardData.completedExercises;
       document.getElementById('sleepQuality').textContent = `${dashboardData.sleepQuality}h avg`;
       document.getElementById('consistencyStreak').textContent = `${dashboardData.consistencyStreak} days`;
+
+      // Update progress level
+      updateProgressLevel();
+      
+      // Update achievements
+      updateAchievementsDisplay();
 
       // Update activities
       const activityList = document.getElementById('activityList');
@@ -851,7 +1123,7 @@
         goalItem.className = 'goal-item';
         goalItem.innerHTML = `
           <div class="goal-checkbox">
-            <input type="checkbox" id="goal${goal.id}" ${goal.checked ? 'checked' : ''}>
+            <input type="checkbox" id="goal${goal.id}" ${goal.checked ? 'checked' : ''} onchange="toggleGoal(${goal.id})">
           </div>
           <div class="goal-details">
             <div class="goal-title">${goal.title}</div>
@@ -878,6 +1150,80 @@
 
       // Initialize charts with actual data
       initializeCharts();
+    }
+
+    // Update progress level display
+    function updateProgressLevel() {
+      const currentLevel = progressSystem.getCurrentLevel(dashboardData.totalXP || 0);
+      
+      document.getElementById('levelBadge').textContent = currentLevel.name;
+      document.getElementById('levelBadge').innerHTML = `<i class="${currentLevel.badge}"></i> ${currentLevel.name}`;
+      
+      if (currentLevel.nextLevel) {
+        document.getElementById('nextLevel').textContent = currentLevel.nextLevel.name;
+        document.getElementById('levelFill').style.width = `${currentLevel.progress * 100}%`;
+        document.getElementById('currentXP').textContent = `${dashboardData.totalXP || 0} XP`;
+        document.getElementById('nextLevelXP').textContent = `${currentLevel.nextLevel.xpRequired} XP for next level`;
+      } else {
+        document.getElementById('nextLevel').textContent = "Maximum Level!";
+        document.getElementById('levelFill').style.width = '100%';
+        document.getElementById('currentXP').textContent = `${dashboardData.totalXP || 0} XP`;
+        document.getElementById('nextLevelXP').textContent = "You've reached the highest level!";
+      }
+    }
+
+    // Update achievements display
+    function updateAchievementsDisplay() {
+      const updatedAchievements = progressSystem.updateAchievements(dashboardData);
+      const badgeContainer = document.getElementById('badgeContainer');
+      badgeContainer.innerHTML = '';
+      
+      updatedAchievements.forEach(achievement => {
+        const badge = document.createElement('div');
+        badge.className = `badge ${achievement.unlocked ? '' : 'locked'}`;
+        badge.innerHTML = `
+          <i class="${achievement.icon}"></i>
+          <h4>${achievement.name}</h4>
+          <p>${achievement.description}</p>
+          ${achievement.unlocked ? `<small>+${achievement.xp} XP</small>` : '<small>Locked</small>'}
+        `;
+        badgeContainer.appendChild(badge);
+      });
+    }
+
+    // Toggle goal completion
+    function toggleGoal(goalId) {
+      const goal = dashboardData.goals.find(g => g.id === goalId);
+      if (goal) {
+        goal.checked = !goal.checked;
+        
+        // Award XP when goal is completed
+        if (goal.checked) {
+          dashboardData.totalXP = (dashboardData.totalXP || 0) + (goal.xp || 10);
+          dashboardData.completedExercises = (dashboardData.completedExercises || 0) + 1;
+          
+          // Add activity
+          const now = new Date();
+          const timeString = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+          dashboardData.activities.unshift({
+            type: 'exercise',
+            title: `Completed: ${goal.title}`,
+            time: `Today, ${timeString}`,
+            xp: goal.xp || 10
+          });
+          
+          // Keep only recent activities
+          if (dashboardData.activities.length > 10) {
+            dashboardData.activities = dashboardData.activities.slice(0, 10);
+          }
+          
+          // Update wellness score
+          dashboardData.wellnessScore = Math.min(100, dashboardData.wellnessScore + 2);
+        }
+        
+        localStorage.setItem('dashboardData', JSON.stringify(dashboardData));
+        initializeDashboard();
+      }
     }
 
     // Initialize charts
@@ -990,7 +1336,9 @@
         const mood = item.getAttribute('data-mood');
         const today = new Date().toISOString().split('T')[0];
         dashboardData.moodData[today] = mood;
-        localStorage.setItem('dashboardData', JSON.stringify(dashboardData));
+        
+        // Award XP for mood tracking
+        dashboardData.totalXP = (dashboardData.totalXP || 0) + 5;
         
         // Update wellness score based on mood
         const moodImpact = {
@@ -1003,24 +1351,36 @@
         
         dashboardData.wellnessScore = Math.min(100, Math.max(0, dashboardData.wellnessScore + moodImpact[mood]));
         document.getElementById('wellnessScore').textContent = `${dashboardData.wellnessScore}/100`;
+        
+        // Add activity
+        const now = new Date();
+        const timeString = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+        dashboardData.activities.unshift({
+          type: 'assessment',
+          title: `Mood recorded: ${mood}`,
+          time: `Today, ${timeString}`,
+          xp: 5
+        });
+        
+        // Keep only recent activities
+        if (dashboardData.activities.length > 10) {
+          dashboardData.activities = dashboardData.activities.slice(0, 10);
+        }
+        
         localStorage.setItem('dashboardData', JSON.stringify(dashboardData));
         
-        // Refresh charts
-        initializeCharts();
+        // Refresh dashboard
+        initializeDashboard();
       });
     });
 
     // Time range filter
     document.getElementById('timeRange').addEventListener('change', function() {
-      // In a real app, this would fetch new data based on the selected time range
       console.log('Time range changed to:', this.value);
     });
 
-    // Chatbase toggle button
     const chatbaseToggle = document.getElementById('chatbaseToggle');
-    
-    // Remove pulse animation after first interaction
-    chatbaseToggle.addEventListener('click', function() {
+        chatbaseToggle.addEventListener('click', function() {
       this.classList.remove('pulse');
     });
 
