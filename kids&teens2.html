@@ -405,19 +405,21 @@
     </footer>
 
     <script>
+      
+
         // Sample data for activities with real APIs
         const activities = [
             {
-                id: 1,
-                name: "Memory Game",
-                description: "Boost your memory with this fun matching game. Find all the pairs to win!",
-                category: "games",
-                ageRange: "5-12",
-                image: "https://images.unsplash.com/photo-1592478411213-6153e4ebc696?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
-                url: "https://memory-game.pro",
-                apiUrl: "https://cdn-icons-png.flaticon.com/512/1169/1169608.png",
-                featured: true
-            },
+    id: 1,
+    name: "Memory Game",
+    description: "Boost your memory with this fun matching game. Find all the pairs to win!",
+    category: "games",
+    ageRange: "5-12",
+   image: "https://cdn-icons-png.flaticon.com/512/1169/1169608.png",
+    icon: "https://cdn-icons-png.flaticon.com/512/1169/1169608.png",
+   url: "https://www.memozor.com/memory-games/for-kids/animals",
+    featured: true
+  },
             {
                 id: 2,
                 name: "Breathing Exercise",
@@ -430,27 +432,28 @@
                 featured: true
             },
             {
-                id: 3,
-                name: "SuperBetter",
-                description: "Build resilience while playing fun games that help you overcome challenges.",
-                category: "games",
-                ageRange: "10-18",
-                image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
-                url: "https://www.superbetter.com",
-                apiUrl: "https://api.superbetter.com/v3/games",
-                featured: true
-            },
-            {
-                id: 4,
-                name: "Calm Kids",
-                description: "Bedtime stories and relaxing sounds to help you sleep better.",
-                category: "relaxation",
-                ageRange: "3-10",
-                image: "https://images.unsplash.com/photo-1511895426328-dc8714191300?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
-                url: "https://www.calm.com/kids",
-                apiUrl: "https://api.calm.com/v1/meditations?category=kids",
-                featured: false
-            },
+    id: 3,
+    name: "Bored Games",
+    description: "Find fun and engaging activities/games for ages 10-18 to build resilience.",
+    category: "games",
+    ageRange: "10-18",
+    image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80",
+    url: "https://bored-api.appbrewery.com",   
+    apiUrl: "https://bored-api.appbrewery.com/random",  
+    featured: true
+},
+{
+    id: 4,
+    name: "Calm Kids",
+    description: "Cute dog pictures to make kids smile and relax before bedtime.",
+    category: "relaxation",
+    ageRange: "3-10",
+    image: "https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=600&q=80",
+    url: "https://dog.ceo/dog-api/",
+    apiUrl: "https://dog.ceo/api/breeds/image/random",
+    featured: false
+}
+,
             {
                 id: 5,
                 name: "Storyly Adventures",
@@ -495,17 +498,8 @@
                 apiUrl: "https://api.childrens-stories.com/v1/stories",
                 featured: false
             },
-            {
-                id: 9,
-                name: "Breathe, Think, Do",
-                description: "Learn problem-solving skills while staying calm in challenging situations.",
-                category: "learning",
-                ageRange: "4-8",
-                image: "https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
-                url: "https://breathethinkdo.org",
-                apiUrl: "https://api.sesamestreet.org/v1/activities",
-                featured: true
-            },
+           
+
             {
                 id: 10,
                 name: "Math Adventure",
